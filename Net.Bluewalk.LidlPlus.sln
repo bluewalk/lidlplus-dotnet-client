@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Bluewalk.LidlPlus", "Net.Bluewalk.LidlPlus\Net.Bluewalk.LidlPlus.csproj", "{4CF4BAD3-5870-4C3B-A009-D067720A9EFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CF4BAD3-5870-4C3B-A009-D067720A9EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF4BAD3-5870-4C3B-A009-D067720A9EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF4BAD3-5870-4C3B-A009-D067720A9EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF4BAD3-5870-4C3B-A009-D067720A9EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363C7879-3F17-4937-B9FF-41935A6D379C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363C7879-3F17-4937-B9FF-41935A6D379C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363C7879-3F17-4937-B9FF-41935A6D379C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363C7879-3F17-4937-B9FF-41935A6D379C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2359B2A4-C20F-4AEA-841A-F273DB17C9A9}
+	EndGlobalSection
+EndGlobal
