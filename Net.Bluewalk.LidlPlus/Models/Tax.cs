@@ -5,7 +5,6 @@ namespace Net.Bluewalk.LidlPlus.Models
     public class Tax
     {
         [JsonProperty("taxGroup")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public long TaxGroup { get; set; }
 
         [JsonProperty("taxGroupName")]
