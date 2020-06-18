@@ -14,7 +14,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public string TransactionNumber { get; set; }
 
         [JsonProperty("cardTypeCode")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public long CardTypeCode { get; set; }
 
         [JsonProperty("transactionTypeCode")]

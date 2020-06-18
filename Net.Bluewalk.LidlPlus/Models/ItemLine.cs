@@ -9,7 +9,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public decimal CurrentUnitPrice { get; set; }
 
         [JsonProperty("quantity")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public long Quantity { get; set; }
 
         [JsonProperty("isWeight")]
@@ -25,7 +24,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public string Description { get; set; }
 
         [JsonProperty("taxGroup")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public long TaxGroup { get; set; }
 
         [JsonProperty("taxGroupName")]

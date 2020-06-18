@@ -13,7 +13,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public string BarCode { get; set; }
 
         [JsonProperty("sequenceNumber")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public long SequenceNumber { get; set; }
 
         [JsonProperty("workstation")]
@@ -41,10 +40,10 @@ namespace Net.Bluewalk.LidlPlus.Models
         public DateTimeOffset Date { get; set; }
 
         [JsonProperty("totalAmount")]
-        public string TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         [JsonProperty("sumAmount")]
-        public string SumAmount { get; set; }
+        public decimal SumAmount { get; set; }
 
         [JsonProperty("storeCode")]
         public string StoreCode { get; set; }
@@ -68,7 +67,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public decimal LinesScannedCount { get; set; }
 
         [JsonProperty("totalDiscount")]
-        //[JsonConverter(typeof(ParseStringConverter))]
         public decimal TotalDiscount { get; set; }
 
         [JsonProperty("taxExcemptTexts")]
@@ -108,6 +106,6 @@ namespace Net.Bluewalk.LidlPlus.Models
         public object FiscalDataFik { get; set; }
 
         [JsonProperty("operatorId")]
-        public object OperatorId { get; set; }
+        public long OperatorId { get; set; }
     }
 }
