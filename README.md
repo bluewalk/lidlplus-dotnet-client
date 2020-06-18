@@ -1,7 +1,7 @@
 # lidlplus-dotnet-client
 Lidl Plus .NET API client
 
-![Publish NuGet](https://github.com/bluewalk/lidlplus-dotnet-client/workflows/Publish%20NuGet/badge.svg?branch=master)
+![Publish NuGet](https://github.com/bluewalk/lidlplus-dotnet-client/workflows/Publish%20NuGet/badge.svg)
 
 This library allows you to query your Lidl Plus receipts, coupons and stores.
 It even allows you to generate a PNG receipt to use in your automation scripts, e.g. automatically add a receipt to your transactions.
