@@ -29,7 +29,7 @@ namespace Net.Bluewalk.LidlPlus
 
         private static object REQUEST_HEADERS = new
         {
-            App_Version = "14.21.2",
+            App_Version = "999.99.9",
             Operating_System = "iOS",
             App = "com.lidl.eci.lidl.plus",
             Accept_Language = "nl_NL"
