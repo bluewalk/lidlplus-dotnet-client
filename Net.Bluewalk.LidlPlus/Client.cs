@@ -49,7 +49,7 @@ namespace Net.Bluewalk.LidlPlus
                 _authToken = JsonConvert.DeserializeObject<AuthToken>(File.ReadAllText(TOKEN_PATH));
         }
 
-        private IFlurlClient GetClient(string baseUrl) 
+        private IFlurlClient GetClient(string baseUrl)
         {
             return new FlurlClient(baseUrl).Configure(s =>
             {
@@ -196,7 +196,7 @@ namespace Net.Bluewalk.LidlPlus
             var family = collection.Install(typeof(Client).GetTypeInfo().Assembly
                 .GetManifestResourceStream("Net.Bluewalk.LidlPlus.Resources.receipt_font.ttf"));
             var font = family.CreateFont(12);
-            
+
             var measurement = TextMeasurer.Measure(str.Body, new RendererOptions(font));
             var width = (int) measurement.Width + 40;
             var height = (int) measurement.Height + 40 + 170 /* logo */ + 130 /* barcode */;
@@ -241,7 +241,7 @@ namespace Net.Bluewalk.LidlPlus
 
                 using (var ms = new MemoryStream())
                 {
-                    receipt.SaveAsPng(ms);
+                    receipt.SaveAsJpeg(ms);
                     return ms.ToArray();
                 }
             }
