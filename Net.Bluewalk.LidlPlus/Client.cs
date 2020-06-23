@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using ZXing;
@@ -241,7 +242,10 @@ namespace Net.Bluewalk.LidlPlus
 
                 using (var ms = new MemoryStream())
                 {
-                    receipt.SaveAsJpeg(ms);
+                    receipt.SaveAsJpeg(ms, new JpegEncoder
+                    {
+                        Quality = 100
+                    });
                     return ms.ToArray();
                 }
             }
