@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.Formats.Bmp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
@@ -189,7 +190,7 @@ namespace Net.Bluewalk.LidlPlus
             };
         }
 
-        public async Task<byte[]> GetTicketPng(string id)
+        public async Task<byte[]> GetTicketImage(string id, ImageType type = ImageType.Jpg)
         {
             var str = await GetTicketString(id);
 
@@ -242,10 +243,25 @@ namespace Net.Bluewalk.LidlPlus
 
                 using (var ms = new MemoryStream())
                 {
-                    receipt.SaveAsJpeg(ms, new JpegEncoder
+                    switch (type)
                     {
-                        Quality = 100
-                    });
+                        case ImageType.Png:
+                            receipt.SaveAsPng(ms);
+                            break;
+                        case ImageType.Bmp:
+                            receipt.SaveAsBmp(ms, new BmpEncoder
+                            {
+                                BitsPerPixel = BmpBitsPerPixel.Pixel32
+                            });
+                            break;
+                        default:
+                            receipt.SaveAsJpeg(ms, new JpegEncoder
+                            {
+                                Quality = 100
+                            });
+                            break;
+                    }
+
                     return ms.ToArray();
                 }
             }
