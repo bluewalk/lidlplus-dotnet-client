@@ -142,17 +142,17 @@ namespace Net.Bluewalk.LidlPlus
 
                 if (l.Quantity != 1)
                     if (l.IsWeight)
-                        contents.AppendLine($"    {l.Quantity} kg x {l.CurrentUnitPrice} EUR/kg");
+                        contents.AppendLine($"   {l.Quantity} kg x {l.CurrentUnitPrice} EUR/kg");
                     else
-                        contents.AppendLine($"    {l.Quantity} X {l.CurrentUnitPrice}");
+                        contents.AppendLine($"   {l.Quantity} X {l.CurrentUnitPrice}");
 
                 if (l.Deposit != null)
                 {
                     contents.AppendFormat(format, l.Deposit.Description, l.Deposit.Amount);
-                    contents.AppendLine($"    {l.Deposit.Quantity} X {l.Deposit.UnitPrice}");
+                    contents.AppendLine($"   {l.Deposit.Quantity} X {l.Deposit.UnitPrice}");
                 }
 
-                l.Discounts.ForEach(d => contents.AppendFormat("   {0, -42}{1, 5}", d.Description, d.Amount));
+                l.Discounts.ForEach(d => contents.AppendFormat("   {0, -42}{1, 5}\r\n", d.Description, d.Amount));
             });
 
             // Totals
