@@ -9,7 +9,7 @@ namespace Net.Bluewalk.LidlPlus.Models
         public decimal CurrentUnitPrice { get; set; }
 
         [JsonProperty("quantity")]
-        public long Quantity { get; set; }
+        public decimal Quantity { get; set; }
 
         [JsonProperty("isWeight")]
         public bool IsWeight { get; set; }
