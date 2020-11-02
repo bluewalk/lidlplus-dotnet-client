@@ -27,25 +27,21 @@ namespace Net.Bluewalk.LidlPlus
     public class Client
     {
         private static string ACCOUNT_URL = "https://accounts.lidl.com/";
-        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v19/NL/";
-
-        private static object REQUEST_HEADERS = new
-        {
-            App_Version = "999.99.9",
-            Operating_System = "iOS",
-            App = "com.lidl.eci.lidl.plus",
-            Accept_Language = "nl_NL"
-        };
+        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v19/";
         private static string TOKEN_PATH = Path.Combine(Path.GetTempPath(), "net-bluewalk-lidl-token.json");
 
         private readonly string _refreshToken;
+        private readonly string _countryCode;
+        private readonly string _language;
         private readonly IWebProxy _webProxy;
         private AuthToken _authToken;
 
-        public Client(string refreshToken, IWebProxy webProxy = null)
+        public Client(string refreshToken, string countryCode = "NL", string language = "nl_NL", IWebProxy webProxy = null)
         {
             _refreshToken = refreshToken;
+            _countryCode = countryCode;
             _webProxy = webProxy;
+            _language = language;
 
             if (File.Exists(TOKEN_PATH))
                 _authToken = JsonConvert.DeserializeObject<AuthToken>(File.ReadAllText(TOKEN_PATH));
@@ -69,8 +65,14 @@ namespace Net.Bluewalk.LidlPlus
         private IFlurlRequest GetRequest(string url)
         {
             return url
-                .WithClient(GetClient(APPGATEWAY_URL))
-                .WithHeaders(REQUEST_HEADERS)
+                .WithClient(GetClient($"{APPGATEWAY_URL}/{_countryCode}"))
+                .WithHeaders(new
+                {
+                    App_Version = "999.99.9",
+                    Operating_System = "iOS",
+                    App = "com.lidl.eci.lidl.plus",
+                    Accept_Language = _language
+                })
                 .WithOAuthBearerToken(_authToken.AccessToken);
         }
 
@@ -203,7 +205,7 @@ namespace Net.Bluewalk.LidlPlus
             var width = (int) measurement.Width + 40;
             var height = (int) measurement.Height + 40 + 170 /* logo */ + 130 /* barcode */;
 
-            var logo = Image.Load(typeof(Client).GetTypeInfo().Assembly
+            var logo = await Image.LoadAsync(typeof(Client).GetTypeInfo().Assembly
                 .GetManifestResourceStream("Net.Bluewalk.LidlPlus.Resources.logo.png"));
 
             var bcw = new BarcodeWriterPixelData
@@ -246,16 +248,16 @@ namespace Net.Bluewalk.LidlPlus
                     switch (type)
                     {
                         case ImageType.Png:
-                            receipt.SaveAsPng(ms);
+                            await receipt.SaveAsPngAsync(ms);
                             break;
                         case ImageType.Bmp:
-                            receipt.SaveAsBmp(ms, new BmpEncoder
+                            await receipt.SaveAsBmpAsync(ms, new BmpEncoder
                             {
                                 BitsPerPixel = BmpBitsPerPixel.Pixel32
                             });
                             break;
                         default:
-                            receipt.SaveAsJpeg(ms, new JpegEncoder
+                            await receipt.SaveAsJpegAsync(ms, new JpegEncoder
                             {
                                 Quality = 100
                             });
