@@ -10,14 +10,14 @@
     <RepositoryUrl>https://github.com/bluewalk/lidlplus-dotnet-client</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>lidl plus net dotnet</PackageTags>
-    <Version>0.9.4.2</Version>
+    <Version>0.9.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flurl.Http" Version="2.4.2" />
+    <PackageReference Include="Flurl.Http" Version="3.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0009" />
-    <PackageReference Include="ZXing.Net" Version="0.16.5" />
+    <PackageReference Include="ZXing.Net" Version="0.16.6" />
   </ItemGroup>
 
   <ItemGroup>
