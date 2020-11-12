@@ -26,8 +26,8 @@ namespace Net.Bluewalk.LidlPlus
 {
     public class Client
     {
-        private static string ACCOUNT_URL = "https://accounts.lidl.com/";
-        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v19/";
+        private static string ACCOUNT_URL = "https://accounts.lidl.com";
+        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v19";
         private static string TOKEN_PATH = Path.Combine(Path.GetTempPath(), "net-bluewalk-lidl-token.json");
 
         private readonly string _refreshToken;
@@ -47,9 +47,9 @@ namespace Net.Bluewalk.LidlPlus
                 _authToken = JsonConvert.DeserializeObject<AuthToken>(File.ReadAllText(TOKEN_PATH));
         }
 
-        private IFlurlClient GetClient(string baseUrl)
+        private IFlurlClient GetClient()
         {
-            return new FlurlClient(baseUrl).Configure(s =>
+            return new FlurlClient().Configure(s =>
             {
                 s.HttpClientFactory = new ProxyHttpFactory(_webProxy);
                 s.JsonSerializer = new NewtonsoftJsonSerializer(
@@ -64,8 +64,8 @@ namespace Net.Bluewalk.LidlPlus
 
         private IFlurlRequest GetRequest(string url)
         {
-            return url
-                .WithClient(GetClient($"{APPGATEWAY_URL}/{_countryCode}"))
+            return $"{APPGATEWAY_URL}/{_countryCode}/{url}"
+                .WithClient(GetClient())
                 .WithHeaders(new
                 {
                     App_Version = "999.99.9",
@@ -78,8 +78,8 @@ namespace Net.Bluewalk.LidlPlus
 
         private async Task Auth()
         {
-            _authToken = await "connect/token"
-                .WithClient(GetClient(ACCOUNT_URL))
+            _authToken = await $"{ACCOUNT_URL}/connect/token"
+                .WithClient(GetClient())
                 .WithBasicAuth("LidlPlusNativeClient", "secret")
                 .PostUrlEncodedAsync(new
                 {
