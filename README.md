@@ -21,7 +21,7 @@ You'll see a request going to `https://accounts.lidl.com/connect/token` which wi
 var client = new Client("myrefreshtoken");
 var receipts = await client.GetTickets();
 
-var latest = await client.GetTicketPng(receipts.FirstOrDefault().Id);
+var latest = await client.GetTicketImage(receipts.Records.FirstOrDefault().Id);
 
 File.WriteAllBytes("receipt.png", latest);
 ```

@@ -27,21 +27,21 @@ namespace Net.Bluewalk.LidlPlus
     public class Client
     {
         private static string ACCOUNT_URL = "https://accounts.lidl.com";
-        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v19";
+        private static string APPGATEWAY_TICKETS_URL = "https://appgateway.lidlplus.com/tickets/api/v1";
+        private static string APPGATEWAY_STORES_URL = "https://appgateway.lidlplus.com/stores/v2";
+        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v24";
         private static string TOKEN_PATH = Path.Combine(Path.GetTempPath(), "net-bluewalk-lidl-token.json");
 
         private readonly string _refreshToken;
         private readonly string _countryCode;
-        private readonly string _language;
         private readonly IWebProxy _webProxy;
         private AuthToken _authToken;
 
-        public Client(string refreshToken, string countryCode = "NL", string language = "nl_NL", IWebProxy webProxy = null)
+        public Client(string refreshToken, string countryCode = "NL", IWebProxy webProxy = null)
         {
             _refreshToken = refreshToken;
             _countryCode = countryCode;
             _webProxy = webProxy;
-            _language = language;
 
             if (File.Exists(TOKEN_PATH))
                 _authToken = JsonConvert.DeserializeObject<AuthToken>(File.ReadAllText(TOKEN_PATH));
@@ -62,16 +62,16 @@ namespace Net.Bluewalk.LidlPlus
             });
         }
 
-        private IFlurlRequest GetRequest(string url)
+        private IFlurlRequest GetRequest(string url, string endpoint)
         {
-            return $"{APPGATEWAY_URL}/{_countryCode}/{url}"
+            return $"{url}/{_countryCode}/{endpoint}"
                 .WithClient(GetClient())
                 .WithHeaders(new
                 {
                     App_Version = "999.99.9",
                     Operating_System = "iOS",
                     App = "com.lidl.eci.lidl.plus",
-                    Accept_Language = _language
+                    Accept_Language = _countryCode
                 })
                 .WithOAuthBearerToken(_authToken.AccessToken);
         }
@@ -101,25 +101,25 @@ namespace Net.Bluewalk.LidlPlus
         {
             await CheckAuth();
 
-            return await GetRequest($"stores/{code}")
+            return await GetRequest(APPGATEWAY_STORES_URL, code)
                 .AllowAnyHttpStatus()
                 .GetJsonAsync<Store>();
         }
 
-        public async Task<List<Ticket>> GetTickets()
+        public async Task<ApiList<Ticket>> GetTickets(int page = 1)
         {
             await CheckAuth();
 
-            return await GetRequest("tickets")
+            return await GetRequest(APPGATEWAY_TICKETS_URL, $"list/{page}")
                 .AllowAnyHttpStatus()
-                .GetJsonAsync<List<Ticket>>();
+                .GetJsonAsync<ApiList<Ticket>>();
         }
 
         public async Task<Ticket> GetTicket(string id)
         {
             await CheckAuth();
 
-            return await GetRequest($"tickets/{id}")
+            return await GetRequest(APPGATEWAY_URL, $"tickets/{id}")
                 .AllowAnyHttpStatus()
                 .GetJsonAsync<Ticket>();
         }
