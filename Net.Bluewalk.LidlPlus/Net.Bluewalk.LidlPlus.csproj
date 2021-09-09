@@ -5,12 +5,13 @@
     <Authors>Bluewalk</Authors>
     <Company>Bluewalk</Company>
     <Description>Lidl Plus .NET API client</Description>
-    <Copyright>Copyright 2020 Bluewalk</Copyright>
+    <Copyright>Copyright 2021 Bluewalk</Copyright>
     <PackageProjectUrl>https://github.com/bluewalk/lidlplus-dotnet-client</PackageProjectUrl>
     <RepositoryUrl>https://github.com/bluewalk/lidlplus-dotnet-client</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>lidl plus net dotnet</PackageTags>
-    <Version>0.9.5.1</Version>
+    <PackageTags>lidl plus net dotnet receipts</PackageTags>
+    <Version>0.9.6.0</Version>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
