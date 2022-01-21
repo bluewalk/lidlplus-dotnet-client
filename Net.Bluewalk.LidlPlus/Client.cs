@@ -27,9 +27,8 @@ namespace Net.Bluewalk.LidlPlus
     public class Client
     {
         private static string ACCOUNT_URL = "https://accounts.lidl.com";
-        private static string APPGATEWAY_TICKETS_URL = "https://appgateway.lidlplus.com/tickets/api/v1";
+        private static string APPGATEWAY_TICKETS_URL = "https://tickets.lidlplus.com/api/v1";
         private static string APPGATEWAY_STORES_URL = "https://appgateway.lidlplus.com/stores/v2";
-        private static string APPGATEWAY_URL = "https://appgateway.lidlplus.com/app/v24";
         private static string TOKEN_PATH = Path.Combine(Path.GetTempPath(), "net-bluewalk-lidl-token.json");
 
         private readonly string _refreshToken;
@@ -119,7 +118,7 @@ namespace Net.Bluewalk.LidlPlus
         {
             await CheckAuth();
 
-            return await GetRequest(APPGATEWAY_URL, $"tickets/{id}")
+            return await GetRequest(APPGATEWAY_TICKETS_URL, $"tickets/{id}")
                 .AllowAnyHttpStatus()
                 .GetJsonAsync<Ticket>();
         }
