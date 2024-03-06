@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.0.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.7" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0009" />
     <PackageReference Include="ZXing.Net" Version="0.16.6" />
   </ItemGroup>
